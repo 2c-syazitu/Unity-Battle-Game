@@ -1,6 +1,6 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,6 +16,8 @@ public class PlayerUI : CharacterUI
     [SerializeField] protected GameObject targetPreviewL;
     [SerializeField] protected Image hpBer;
     [SerializeField] protected Image mpBer;
+    [SerializeField] protected BattleSystem sys;
+    [SerializeField] protected Lv lvData;
 
     [SerializeField] private Animator animator;
 
@@ -136,6 +138,11 @@ public class PlayerUI : CharacterUI
             yield return null;
         }
         berImage.fillAmount = (float)nowInt / maxInt;
+    }
+
+    public void setExp(float f)
+    {
+
     }
 
     public void lvUp()

@@ -57,7 +57,6 @@ public class Character
     protected List<Item> itemList;
     protected Dictionary<Equipment.EquipType, Equipment> equipList;
 
-    protected BattleSystem sys;
     protected CharacterUI ui;
     protected CharacterType type;
 
@@ -66,7 +65,7 @@ public class Character
 
 
     public Character(string name, int hp, int mp, float atk, float mgc, float def, float spd,
-                     CharacterType type, BattleSystem sys)
+                     CharacterType type)
     {
         this.name = name;
         this.baseMaxHp = hp;
@@ -78,7 +77,6 @@ public class Character
         this.baseDef = def;
         this.baseSpd = spd;
         this.type = type;
-        this.sys = sys;
         isAlive = true;
         executeSkill = null;
         targetList = new List<Character>();
@@ -99,16 +97,6 @@ public class Character
         attributeDef[Skill.SkillAttribute.Tunder] = 0;
         attributeDef[Skill.SkillAttribute.Light] = 0;
         attributeDef[Skill.SkillAttribute.Darkness] = 0;
-
-
-        /*テスト*/
-        skillList.Add(new Heal(sys));
-        skillList.Add(new AttackBuff(sys));
-        skillList.Add(new DoragonBreath(sys));
-        skillList.Add(new CompositeBuff(sys));
-        skillList.Add(new Poison(sys));
-
-        itemList.Add(new Herb(sys));
 
         /*装備のステータスを計算*/
         calcStatas();
@@ -276,7 +264,6 @@ public class Character
     public virtual void setUI(CharacterUI ui)
     {
         this.ui = ui;
-        ui.setSys(sys);
     }
 
     public void setMaxHp(int i)

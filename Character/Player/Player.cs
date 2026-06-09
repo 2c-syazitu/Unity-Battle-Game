@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Player : Character
 {
@@ -9,15 +10,21 @@ public class Player : Character
 
     private Lv lvData;
 
-    public Player(string name, int hp, int mp, float atk, float mgc, float def, float spd, BattleSystem sys)
-                 : base(name, hp, mp, atk, mgc, def, spd, CharacterType.Player, sys)
+    public Player(string name, int hp, int mp, float atk, float mgc, float def, float spd)
+                 : base(name, hp, mp, atk, mgc, def, spd, CharacterType.Player)
     {
         /*レベル、経験値を初期化*/
         lv = 1;
         exp = 0;
 
         /*経験値の閾値などのデータを格納したスクリプタブルオブジェクト*/
-        lvData = sys.getLvData();
+        // lvData = sys.getLvData();
+        lvData = new Lv();
+        Addressables.LoadAssetAsync<Lv>("Lv").Completed += handle =>
+        {
+            lvData = handle.Result;
+            // Debug.Log($"Addressablesで取得成功！: {data.lastPosition}");
+        };
     }
 
     /*ターンの終了処理*/

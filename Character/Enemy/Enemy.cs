@@ -7,8 +7,8 @@ public class Enemy : Character
     protected EnemyUI enemyUI => base.ui as EnemyUI;
     protected int exp;
 
-    public Enemy(string name, int hp, int mp, float atk, float mgc, float def, float spd, BattleSystem sys)
-                 : base(name, hp, mp, atk, mgc, def, spd, CharacterType.Enemy, sys)
+    public Enemy(string name, int hp, int mp, float atk, float mgc, float def, float spd)
+                 : base(name, hp, mp, atk, mgc, def, spd, CharacterType.Enemy)
     {
         /*エネミーごとに固有の経験値*/
         exp = 0;
@@ -56,7 +56,7 @@ public class Enemy : Character
         if (!isAlive)
         {
             Debug.Log($"en58:{exp}");
-            sys.setExp(exp);
+
         }
     }
 

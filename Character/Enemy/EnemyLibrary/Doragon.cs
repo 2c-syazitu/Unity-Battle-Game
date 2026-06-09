@@ -3,8 +3,8 @@ using UnityEngine;
 public class Doragon : Enemy
 {
 
-    public Doragon(string name, int hp, int mp, float atk, float mgc, float def, float spd, BattleSystem sys)
-        : base(name, hp, mp, atk, mgc, def, spd, sys)
+    public Doragon(string name, int hp, int mp, float atk, float mgc, float def, float spd)
+        : base(name, hp, mp, atk, mgc, def, spd)
     {
         iamgeLink = "EnemyImage/Doragon";
         exp = 100;

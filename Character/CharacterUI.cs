@@ -13,7 +13,6 @@ public class CharacterUI : MonoBehaviour
     protected int hp;
     protected int mp;
     protected bool interactableAnime;
-    protected BattleSystem sys;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,10 +70,5 @@ public class CharacterUI : MonoBehaviour
     public bool getInteractableAnime()
     {
         return interactableAnime;
-    }
-
-    public void setSys(BattleSystem sys)
-    {
-        this.sys = sys;
     }
 }
