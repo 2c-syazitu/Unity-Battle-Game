@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -137,7 +138,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator Battle()
     {
-        while (phase != Phase.End)
+        while (true)
         {
             Debug.Log(phase);
             turnHolder = turn.getTurnHolder();
@@ -208,6 +209,11 @@ public class BattleSystem : MonoBehaviour
                         alive++;
                     }
 
+                    for (int i = 0; i < enemyList.Count; i++)
+                    {
+                        exp += enemyList[i].getExp();
+                    }
+
                     /*生存したプレイヤーに経験値をセット*/
                     for (int i = 0; i < playerList.Count; i++)
                     {
@@ -215,11 +221,17 @@ public class BattleSystem : MonoBehaviour
                         if (playerList[i].getAlive())
                         {
                             playerList[i].setExp((float)exp / alive);
+                            Debug.Log("bs219");
                             yield return new WaitUntil(() => getInteractable());
                         }
                     }
+                    Debug.Log("bs223");
+
+                    phase = Phase.End;
                     break;
                 case Phase.End:
+                    Debug.Log("bs226");
+                    SceneManager.LoadScene("FieldScene");
                     break;
             }
         }
