@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-public class CompositeBuff : Skill
+public class ViewScrollSkill : Skill
 {
     List<BuffEffect> list;
     const string iamgeLink = "BuffImage/SwordAndShield";
     int turn;
 
-    public CompositeBuff(BattleSystem sys)
+    public ViewScrollSkill(BattleSystem sys)
                 /*               cost,baseDmg,(float)rate,(bool)targetAlive*/
                 : base("compositeBuff", 100, 5, 0.2f, true, sys,
                 Skill.SkillTarget.Ally, Skill.SkillRange.Single,
@@ -19,8 +19,9 @@ public class CompositeBuff : Skill
         list = new List<BuffEffect>();
         turn = 3;
         detail = $"atk + {10}\n" +
+                 $"def + 10\n" +
+                 $"def + 10\n" +
                  $"def + 10";
-
 
         list.Add(new(Character.StatasType.Atk, Buff.BuffCalculationType.Percent, 1.1f));
         list.Add(new(Character.StatasType.Def, Buff.BuffCalculationType.Flat, 10));
@@ -40,6 +41,22 @@ public class CompositeBuff : Skill
             Buff b = target.getBuffList().FirstOrDefault(buff => buff.sameResource(this, user));
             if (b == null)
             {
+                targetList[i].setBuff(
+                    new Buff(list, turn, iamgeLink, targetList[i], detail, this, user));
+                targetList[i].setBuff(
+                    new Buff(list, turn, iamgeLink, targetList[i], detail, this, user));
+                targetList[i].setBuff(
+                    new Buff(list, turn, iamgeLink, targetList[i], detail, this, user));
+                targetList[i].setBuff(
+                    new Buff(list, turn, iamgeLink, targetList[i], detail, this, user));
+                targetList[i].setBuff(
+                    new Buff(list, turn, iamgeLink, targetList[i], detail, this, user));
+                targetList[i].setBuff(
+                    new Buff(list, turn, iamgeLink, targetList[i], detail, this, user));
+                targetList[i].setBuff(
+                    new Buff(list, turn, iamgeLink, targetList[i], detail, this, user));
+                targetList[i].setBuff(
+                    new Buff(list, turn, iamgeLink, targetList[i], detail, this, user));
                 targetList[i].setBuff(
                     new Buff(list, turn, iamgeLink, targetList[i], detail, this, user));
             }
