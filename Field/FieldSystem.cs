@@ -24,6 +24,15 @@ public class FieldSystem : MonoBehaviour
     private float fieldImaW;
     private float fieldImaH;
     private Vector2 imageVec;
+    private WalkAbleObj walkAbleObjX;
+    private WalkAbleObj walkAbleObjY;
+
+    public enum WalkAbleObj
+    {
+        Character,
+        Camera,
+        False,
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -115,32 +124,83 @@ public class FieldSystem : MonoBehaviour
     /*引数で与えられた移動後座標が移動可能であればtrueを返す*/
     public bool isWakabke(float moveX, float moveY)
     {
-        bool retv = false;
+        /*X方向に移動可能なオブジェクト*/
+        walkAbleObjX = WalkAbleObj.False;
+        /*Y方向に移動可能なオブジェクト*/
+        walkAbleObjY = WalkAbleObj.False;
+        bool retv;
         imageVec = fieldImageRect.anchoredPosition;
 
-        /*画面端に到達したのであればfalse*/
-        if (Mathf.Abs(x + moveX) <= (fieldW / 2) - 30 && Mathf.Abs(y + moveY) <= (fieldH / 2) - 30 &&
-            /*fieldimageの端が画面端と重なったなら*/
-            Mathf.Abs(imageVec.x - moveX) <= maxDeltaX && Mathf.Abs(imageVec.y - moveY) <= maxDeltaY)
+        /*X座標方向*/
+        /*カメラが画面端に到達していなければ*/
+        if (Mathf.Abs(imageVec.x - moveX) <= maxDeltaX)
+        {
+            walkAbleObjX = WalkAbleObj.Camera;
+            /*キャラクターの座標が中心より端にあれば*/
+            if (x * moveX < 0)
+            {
+                walkAbleObjX = WalkAbleObj.Character;
+            }
+        }
+        /*キャラクターが画面端に到達していなければ*/
+        else if (Mathf.Abs(x + moveX) <= (fieldW / 2) - 30)
+        {
+            walkAbleObjX = WalkAbleObj.Character;
+        }
+
+        /*Y座標方向*/
+        /*カメラが画面端に到達していなければ*/
+        if (Mathf.Abs(imageVec.y - moveY) <= maxDeltaY)
+        {
+            walkAbleObjY = WalkAbleObj.Camera;
+            /*キャラクターの座標が中心より端にあれば*/
+            if (y * moveY < 0)
+            {
+                walkAbleObjY = WalkAbleObj.Character;
+            }
+        }
+        /*キャラクターが画面端に到達していなければ*/
+        else if (Mathf.Abs(x + moveY) <= (fieldH / 2) - 30)
+        {
+            walkAbleObjY = WalkAbleObj.Character;
+        }
+
+        /*X,Yともに移動不可であればfalseを返す*/
+        if (walkAbleObjX == WalkAbleObj.False && walkAbleObjY == WalkAbleObj.False)
+        {
+            retv = false;
+        }
+        else
         {
             retv = true;
         }
-        Debug.Log($"fs121,{retv}");
         return retv;
     }
 
     public void move(float moveX, float moveY)
     {
-        Debug.Log("fs127 test");
-        if (Mathf.Abs(imageVec.x) == maxDeltaX)
+        /*X座標方向*/
+        /*カメラの移動*/
+        if (walkAbleObjX == WalkAbleObj.Camera)
         {
-            charaRect.anchoredPosition += new Vector2(moveX, moveY);
-            Debug.Log($"fs133");
+            fieldImageRect.anchoredPosition -= new Vector2(moveX, 0);
         }
-        else
+        /*キャラクターの移動*/
+        else if (walkAbleObjX == WalkAbleObj.Character)
         {
-            fieldImageRect.anchoredPosition -= new Vector2(moveX, moveY);
+            charaRect.anchoredPosition += new Vector2(moveX, 0);
         }
 
+        /*Y座標方向*/
+        /*カメラの移動*/
+        if (walkAbleObjY == WalkAbleObj.Camera)
+        {
+            fieldImageRect.anchoredPosition -= new Vector2(0, moveY);
+        }
+        /*キャラクターの移動*/
+        else if (walkAbleObjY == WalkAbleObj.Character)
+        {
+            charaRect.anchoredPosition += new Vector2(0, moveY);
+        }
     }
 }
