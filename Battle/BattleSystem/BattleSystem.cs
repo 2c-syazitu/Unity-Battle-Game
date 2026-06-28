@@ -149,7 +149,6 @@ public class BattleSystem : MonoBehaviour
                     phase = Phase.ChoseCommand;
                     break;
                 case Phase.ChoseCommand:
-                    turnLabel.text = $"{turnHolder.getName()}'s turn!!";
                     /*コマンド選択のコルーチン*/
                     yield return StartCoroutine(ChoseCommand());
                     /*フェーズが変更されるまで*/

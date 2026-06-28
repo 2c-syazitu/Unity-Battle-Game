@@ -40,7 +40,11 @@ public class FieldSystem : MonoBehaviour
         fieldRect = field.GetComponent<RectTransform>();
         fieldImageRect = fieldImage.GetComponent<RectTransform>();
         charaRect = character.GetComponent<RectTransform>();
-        charaRect.anchoredPosition = fieldData.position;
+
+        /*画像、キャラクターの座標をセット*/
+        fieldImageRect.anchoredPosition = fieldData.iamgePos;
+        charaRect.anchoredPosition = fieldData.characterPos;
+
         fieldW = fieldRect.rect.width;
         fieldH = fieldRect.rect.height;
 
@@ -109,7 +113,8 @@ public class FieldSystem : MonoBehaviour
             Debug.Log($"fs34:{randomInt}");
             if (randomInt >= 80)
             {
-                fieldData.position = new Vector2(movedX, movedY);
+                fieldData.characterPos = new Vector2(movedX, movedY);
+                fieldData.iamgePos = fieldImageRect.anchoredPosition;
                 fieldData.battleCount--;
 
                 /*バトル開始*/
@@ -160,7 +165,7 @@ public class FieldSystem : MonoBehaviour
             }
         }
         /*キャラクターが画面端に到達していなければ*/
-        else if (Mathf.Abs(x + moveY) <= (fieldH / 2) - 30)
+        else if (Mathf.Abs(y + moveY) <= (fieldH / 2) - 30)
         {
             walkAbleObjY = WalkAbleObj.Character;
         }

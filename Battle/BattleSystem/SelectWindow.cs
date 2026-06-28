@@ -17,10 +17,12 @@ public class SelectWindow : MonoBehaviour
 
 
     private List<Character> targetList = new List<Character>();
+    private ScrollRect scrRec;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        scrRec = GetComponent<ScrollRect>();
 
     }
 
@@ -42,8 +44,15 @@ public class SelectWindow : MonoBehaviour
             selectBut.GetComponentInChildren<TextMeshProUGUI>().text = list[i].getName();
             selectBut.onClick.AddListener(() => OnSelectButClicked(list[index], turnHolder));
 
+
+
+
             /*ボタンのEventTriggerコンポーネントを取得*/
             EventTrigger trigger = selectBut.gameObject.GetComponent<EventTrigger>();
+
+            // AddBridgeEvent(trigger, EventTriggerType.BeginDrag, (data) => scrRec.OnBeginDrag((PointerEventData)data));
+            // AddBridgeEvent(trigger, EventTriggerType.Drag, (data) => scrRec.OnDrag((PointerEventData)data));
+            // AddBridgeEvent(trigger, EventTriggerType.EndDrag, (data) => scrRec.OnEndDrag((PointerEventData)data));
 
             /*マウスカーソルがボタンに乗った時の挙動*/
             EventTrigger.Entry entryEnter = new EventTrigger.Entry();
@@ -80,8 +89,13 @@ public class SelectWindow : MonoBehaviour
             selectBut.GetComponentInChildren<TextMeshProUGUI>().text = list[i].getName();
             selectBut.onClick.AddListener(() => OnSelectButClicked(list[index]));
 
+
             /*ボタンのEventTriggerコンポーネントを取得*/
             EventTrigger trigger = selectBut.gameObject.GetComponent<EventTrigger>();
+
+            // AddBridgeEvent(trigger, EventTriggerType.BeginDrag, (data) => scrRec.OnBeginDrag((PointerEventData)data));
+            // AddBridgeEvent(trigger, EventTriggerType.Drag, (data) => scrRec.OnDrag((PointerEventData)data));
+            // AddBridgeEvent(trigger, EventTriggerType.EndDrag, (data) => scrRec.OnEndDrag((PointerEventData)data));
 
             /*マウスカーソルがボタンに乗った時の挙動*/
             EventTrigger.Entry entryEnter = new EventTrigger.Entry();
@@ -248,6 +262,14 @@ public class SelectWindow : MonoBehaviour
     public List<Character> getTargetList()
     {
         return targetList;
+    }
+
+    private void AddBridgeEvent(EventTrigger trigger, EventTriggerType type, System.Action<BaseEventData> action)
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = type;
+        entry.callback.AddListener((data) => action(data));
+        trigger.triggers.Add(entry);
     }
 
 

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1eebbfb21f4f04b9c13230783c6e64, type: 3}
   m_Name: FieldData
   m_EditorClassIdentifier: Assembly-CSharp::FieldData
-  position: {x: -3, y: -1}
-  battleCount: -17
+  position: {x: 168, y: 1}
+  battleCount: -78

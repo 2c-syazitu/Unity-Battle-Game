@@ -30,6 +30,26 @@ public class CreateCharacter
             characterList[i].setSkill(new CompositeBuff(sys));
             characterList[i].setSkill(new Poison(sys));
             characterList[i].setSkill(new ViewScrollSkill(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+            characterList[i].setSkill(new Heal(sys));
+
 
             characterList[i].setItem(new Herb(sys));
         }
