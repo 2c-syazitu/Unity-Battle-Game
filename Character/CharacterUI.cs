@@ -67,7 +67,7 @@ public class CharacterUI : MonoBehaviour
         mp -= i;
     }
 
-    public bool getInteractableAnime()
+    public bool getInteractableAnima()
     {
         return interactableAnime;
     }

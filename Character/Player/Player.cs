@@ -19,12 +19,12 @@ public class Player : Character
 
         /*経験値の閾値などのデータを格納したスクリプタブルオブジェクト*/
         // lvData = sys.getLvData();
-        lvData = new Lv();
-        Addressables.LoadAssetAsync<Lv>("Lv").Completed += handle =>
-        {
-            lvData = handle.Result;
-            // Debug.Log($"Addressablesで取得成功！: {data.lastPosition}");
-        };
+        // lvData = new Lv();
+        // Addressables.LoadAssetAsync<Lv>("Lv").Completed += handle =>
+        // {
+        //     lvData = handle.Result;
+        //     // Debug.Log($"Addressablesで取得成功！: {data.lastPosition}");
+        // };
     }
 
     /*ターンの終了処理*/
@@ -44,7 +44,7 @@ public class Player : Character
     }
 
     /*経験値のセット*/
-    public void setExp(float f)
+    public void setExp(float f, Lv lvData)
     {
         exp += (int)f;
         /*経験値が閾値を超えた場合レベルを上げる*/

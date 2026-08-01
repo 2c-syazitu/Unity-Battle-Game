@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class Character
 {
     public enum CharacterType
@@ -254,9 +255,9 @@ public class Character
         return attributeDef;
     }
 
-    public bool getInteractableAnime()
+    public bool getInteractableAnima()
     {
-        return ui.getInteractableAnime();
+        return ui.getInteractableAnima();
     }
 
 

@@ -58,6 +58,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textLabel;
     [SerializeField] private GameObject butCover;
     [SerializeField] private Lv lvData;
+    [SerializeField] private CreateObj createObj;
 
     private CreateCharacter creChar;
 
@@ -82,7 +83,8 @@ public class BattleSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        creChar = new CreateCharacter(this);
+        // creChar = new CreateCharacter(this);
+        creChar = createObj.createCharacter;
 
         /*諸々のリストを取得*/
         characterList = creChar.getCharacterList();
@@ -125,6 +127,7 @@ public class BattleSystem : MonoBehaviour
         phase = Phase.Start;
         commandPahse = ChoseCommandPhase.Wait;
         exp = 0;
+
 
         /*バトルスタート*/
         StartCoroutine(Battle());
@@ -219,7 +222,7 @@ public class BattleSystem : MonoBehaviour
                         /*プレイヤーが生存しているなら*/
                         if (playerList[i].getAlive())
                         {
-                            playerList[i].setExp((float)exp / alive);
+                            playerList[i].setExp((float)exp / alive, lvData);
                             Debug.Log("bs219");
                             yield return new WaitUntil(() => getInteractable());
                         }
@@ -255,7 +258,7 @@ public class BattleSystem : MonoBehaviour
         selectWindowPanel.SetActive(false);
         selectWindow.delBut();
 
-        setTextLabel($"{turnHolder.getName()} turn.\nplease chose command.");
+        setTextLabel($"{turnHolder.getName()} turn.\nplease chose coommand.");
 
         yield return new WaitUntil(() => getInteractable());
 
@@ -542,7 +545,7 @@ public class BattleSystem : MonoBehaviour
         //　　テキスト処理
         if (interactableText &&
             //キャラクターのアニメーション処理
-            characterList.All(c => c.getInteractableAnime())
+            characterList.All(c => c.getInteractableAnima())
             )
         {
             return true;
