@@ -9,7 +9,7 @@ public class DoragonBreath : Skill
 
     public DoragonBreath(BattleSystem sys)
                 /*               cost,baseDmg,(float)rate,(bool)targetAlive*/
-                : base("doragonBreath", 10, 0, 1, true, sys, Skill.SkillTarget.Enemy,
+                : base("doragonBreath", 10, 10, 1, true, sys, Skill.SkillTarget.Enemy,
                  Skill.SkillRange.Area, Skill.SkillCastTurn.Charge)
     {
         castTurn = 0;
